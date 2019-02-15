@@ -8,11 +8,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)   
-    if @user.save
-      log_in @user
+    user = User.new(user_params)   
+    if user.save
+      log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      remember user
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      redirect_to user
     else
       render 'new'
     end

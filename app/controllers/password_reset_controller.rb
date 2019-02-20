@@ -21,6 +21,8 @@ class PasswordResetController < ApplicationController
 
   def edit
 
+  end
+
 
     def update
       if params[:user][:password].empty?
